@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import SideBarItem from "./SideBarItem";
 import SearchBar from "./SearchBar";
+import {filterArrayBasedOnInputString} from "../utils"
 
 /**
  * SideBar is a component for displaying other users on the side
@@ -15,14 +16,16 @@ import SearchBar from "./SearchBar";
 
 const ChatSideBar = ({allReceivers, onSelectReceiver}) => {
     const [filteredReceivers, setFilteredReceivers] = useState(allReceivers);
+    const USERNAME_KEY = "name";
 
     const filterReceivers = (input) => {
-        const filtered = allReceivers.filter(({name}) => {
-            const inputUpperCase = input.toUpperCase();
-            const nameUpperCase = name.toUpperCase();
-            return (nameUpperCase.includes(inputUpperCase)) ;
-        })
-        setFilteredReceivers(filtered)
+        setFilteredReceivers(
+            filterArrayBasedOnInputString(
+                [...allReceivers], 
+                input, 
+                USERNAME_KEY
+            )
+        )
     }
 
     return (

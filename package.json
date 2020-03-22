@@ -4,6 +4,7 @@
   "description": "Web-based messaging application",
   "main": "index.js",
   "scripts": {
+    "server": "cd server && npm start",
     "client": "cd client && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

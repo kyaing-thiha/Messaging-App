@@ -8,14 +8,14 @@ import MessageScreen from "./components/MessageScreen"
 /**
   Mock Data
 */
-import {user1, user2, messages} from "./mocks/mockUsers"
+import {user1, user2} from "./mocks/mockUsers"
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
       user: user1,
-      selectedReceiver: null
+      selectedReceiver: null,
     }
   }
 

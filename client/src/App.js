@@ -33,7 +33,7 @@ class App extends Component {
             allReceivers = {user.minionPals} 
             onSelectReceiver = {this.setSelectedReceiver}
           />
-          <MessageScreen/>
+          <MessageScreen {...this.state} />
         </div>
       </div>
     );

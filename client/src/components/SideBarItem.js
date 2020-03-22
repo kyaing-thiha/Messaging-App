@@ -1,5 +1,5 @@
 import React from "react";
-import "./ChatSideBar.css";
+import "./SideBarItem.css";
 
 /**
  * SideBarItem is a component for displaying each user in sidebar
@@ -15,7 +15,13 @@ const SideBarItem = ({name, onSelect, profilePic}) => (
         className="container"
         onClick={onSelect}
     >
-        {name}
+        <div className="profile-picture">
+            
+        </div>
+
+        <div className="user-name">
+            {name}
+        </div>
     </div>
 )
 

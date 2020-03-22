@@ -3,7 +3,10 @@ import React from 'react';
 function App() {
   return (
     <div className="App">
-      React app
+      {/* For Page Layout */}
+      <div className = "chat-screen-container">
+        
+      </div>
     </div>
   );
 }

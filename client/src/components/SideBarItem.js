@@ -8,11 +8,12 @@ import "./SideBarItem.css";
  * @param {String} name of user to display
  * @param {function} onSelect to invoke when item is selected
  * @param {String} profilePic uri to retrieve the profile picture
+ * @param {Boolean} isSelected indicate if the current item is selected in sidebar
  */
 
-const SideBarItem = ({name, onSelect, profilePic}) => (
+const SideBarItem = ({name, onSelect, profilePic, isSelected}) => (
     <div 
-        className="container"
+        className= {`container ${isSelected? "selected-container":""}`}
         onClick={onSelect}
     >
         <div className="profile-picture">

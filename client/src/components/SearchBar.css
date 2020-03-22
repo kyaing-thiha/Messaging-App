@@ -1,0 +1,19 @@
+.search-bar-container{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.search-bar{
+    flex: 1;
+    text-align: center;
+    font-size: 1em;
+    border-radius: 1em;
+    height: 1.3em;
+}
+
+.search-bar:focus{
+    outline: none;
+}

@@ -1,5 +1,5 @@
 .container{
-    background-color: #FB9F6C;
+    background-color: #C4C4C4;
     padding: 10px;
     margin-bottom: 3px;
     height: 45px;
@@ -7,6 +7,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-content: center;
+}
+
+.selected-container{
+    background-color: #4A4141;
+    color: #FFFFFF;
+    box-shadow: 2px 2px #000000;
 }
 
 .profile-picture{
@@ -22,3 +28,4 @@
     flex: 1;
     padding: 10px;
 }
+

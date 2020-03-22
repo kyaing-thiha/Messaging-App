@@ -32,6 +32,7 @@ class App extends Component {
           <SideBar 
             allReceivers = {user.minionPals} 
             onSelectReceiver = {this.setSelectedReceiver}
+            selectedReceiver= {this.state.selectedReceiver}
           />
           <MessageScreen {...this.state} />
         </div>

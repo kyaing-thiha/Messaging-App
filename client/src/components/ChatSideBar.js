@@ -12,9 +12,10 @@ import {filterArrayBasedOnInputString} from "../utils"
  * PropTypes
  * @param {UserObject[]} list of users to display
  * @param {(UserObject)=>()} onSelectReceiver takes the user Object and set as active receiver
+ * @param {UserObject} selectedReceiver UserObject that is currently selected in sidebar
  */
 
-const ChatSideBar = ({allReceivers, onSelectReceiver}) => {
+const ChatSideBar = ({allReceivers, onSelectReceiver, selectedReceiver}) => {
     const [filteredReceivers, setFilteredReceivers] = useState(allReceivers);
     const USERNAME_KEY = "name";
 
@@ -31,13 +32,13 @@ const ChatSideBar = ({allReceivers, onSelectReceiver}) => {
     return (
         <div className="side-bar">
             <SearchBar handleChange={filterReceivers} />
-
             {filteredReceivers.map(receiver => (
                 <SideBarItem 
                     key= {receiver._id} 
                     onSelect= {()=>onSelectReceiver(receiver)} 
                     name = {receiver.name}
                     profilePic={receiver.profilePic}
+                    isSelected={ selectedReceiver && receiver._id === selectedReceiver._id}
                 />    
             ))}
         </div>

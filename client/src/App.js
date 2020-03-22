@@ -1,36 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      {/* For Page Layout */}
-      <div className = "chat-screen-container">
-        <div className = "toolbar" >
-          <span className="application-name">Kyaing's Minions</span>
-          <span className="profile-pic"></span>
-        </div>
+import ToolBar from "./components/ChatToolBar"
+import SideBar from "./components/ChatSideBar"
+import MessageScreen from "./components/MessageScreen"
+
+/**
+  Mock Data
+*/
+import {user1, user2, messages} from "./mocks/mockUsers"
+
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      user: user1,
+      selectedReceiver: null
+    }
+  }
+
+  setSelectedReceiver = (receiver) => {
+    this.setState({selectedReceiver: receiver})
+  }
+
+  render(){
+    const { user } = this.state;
+    return (
+      <div className="chat-screen-container">
+        <ToolBar />
         <div className="chat-main-body-container">
-            <div className="side-bar">
-              
-            </div>
-            <div className="message-screen">
-              <div className="message-screen-title">
-              Minion1
-              </div>
-              <div className="message-display-area">
-                
-              </div>
-              <div className="text-area-container">
-                <input type="text" className="text-area">
-                </input>
-              </div>
-              
-            </div>
+          <SideBar 
+            allReceivers = {user.minionPals} 
+            onSelectReceiver = {this.setSelectedReceiver}
+          />
+          <MessageScreen/>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;

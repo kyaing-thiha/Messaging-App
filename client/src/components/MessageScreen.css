@@ -1,0 +1,41 @@
+
+.message-screen{
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+}
+
+.message-screen-title{
+    flex: 1;
+    background-color: #83C0DA;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.message-display-area{
+    flex: 9;
+    background-color: #C4C4C4;
+}
+
+.text-area-container{
+    flex: 1;
+    background-color: #83C0DA;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 5px 10px 5px 10px;
+}
+
+.text-area{
+    flex: 1;
+    border-radius: 10px;
+    text-align: end;
+    font-size: 1.5em;
+}
+
+.text-area:focus{
+    outline: none;
+}

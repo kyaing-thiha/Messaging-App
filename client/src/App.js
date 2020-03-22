@@ -27,7 +27,7 @@ class App extends Component {
     const { user } = this.state;
     return (
       <div className="chat-screen-container">
-        <ToolBar />
+        <ToolBar profilePic={this.state.user.profilePic}/>
         <div className="chat-main-body-container">
           <SideBar 
             allReceivers = {user.minionPals} 

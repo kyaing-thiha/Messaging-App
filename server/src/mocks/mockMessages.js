@@ -16,7 +16,8 @@ const message = (sender, receiver, content) => ({
 const messages = [
     message(1,2,"Bello"),
     message(2,1,"Me want banana"),
-    message(2,1,"Bananananannana")
+    message(2,1,"Bananananannana"),
+    message(3,2,"This shouldn't be here")
 ]
 
 module.exports=messages

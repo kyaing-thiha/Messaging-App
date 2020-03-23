@@ -1,33 +1,44 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Message from "./Message";
 import "./MessageScreen.css";
-import {fetchURL} from "../utils"
+import { fetchURL } from "../utils"
 
-const Title = ({name}) => (
+const Title = ({ name }) => (
     <div className="message-screen-title">
         {name}
     </div>
 )
 
 class MessageScreen extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             messages: []
         }
     }
 
-    componentDidMount(){
-        fetchURL("http://localhost:8080/mock/getMockMessages")
-            .then(res => this.setState({messages: res}))
-            .catch(err=>{/* LOGIC to handle if fetching message failed*/})
+    fetchMessages = async () => {
+        try{
+            const { user, selectedReceiver } = this.props;
+            const messages = await fetchURL(`http://localhost:8080/messages/${user._id}/${selectedReceiver._id}`);
+            this.setState({
+                messages
+            })
+        }
+        catch{/* To handle fetching messages failed */}
     }
 
-    render(){
-        const {user, selectedReceiver} = this.props;
-        const {messages} = this.state;
+    componentDidUpdate(prevProps) {
+        if (prevProps.selectedReceiver !== this.props.selectedReceiver){
+            this.fetchMessages()
+        }
+    }
 
-        const filteredMessage = selectedReceiver && 
+    render() {
+        const { user, selectedReceiver } = this.props;
+        const { messages } = this.state;
+
+        const filteredMessage = selectedReceiver &&
             messages.filter(message =>
                 (
                     message.sender === user._id &&
@@ -38,18 +49,18 @@ class MessageScreen extends Component {
                     message.receiver === user._id
                 )
             )
-        
-        return(
+
+        return (
             <div className="message-screen">
-                { selectedReceiver? 
-                    <Title name={selectedReceiver.name} />: 
+                {selectedReceiver ?
+                    <Title name={selectedReceiver.name} /> :
                     null
                 }
 
                 <div className="message-display-area">
                     {filteredMessage && filteredMessage.map(message => (
-                        <Message 
-                            key={message._id} 
+                        <Message
+                            key={message._id}
                             content={message.content}
                             sentByUser={message.sender === user._id}
                         />

@@ -1,0 +1,10 @@
+.chat-screen-container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-main-body-container{
+    flex: 9;
+    display: flex;
+}

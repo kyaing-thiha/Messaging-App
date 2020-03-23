@@ -2,14 +2,3 @@ body{
     margin: 0px;
     border: 1px solid #4A4141;
 }
-
-.chat-screen-container{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.chat-main-body-container{
-    flex: 9;
-    display: flex;
-}

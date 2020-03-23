@@ -14,9 +14,9 @@ class ChatPage extends Component {
       selectedReceiver: null,
     }
   }
-
+  
   async componentDidMount(){
-    const user = await fetchURL("http://localhost:8080/getMockUser");
+    const user = await fetchURL("http://localhost:8080/mock/getMockUser");
     this.setState({user});
   }
 

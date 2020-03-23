@@ -13,7 +13,6 @@ export const fetchURL = async(url) => {
         return responseJSON;
     }
     catch(error){
-        console.log ("Error in client/utils.js: ", error);
-        return null;
+        throw error;
     }
 }

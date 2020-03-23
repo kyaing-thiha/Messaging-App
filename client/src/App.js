@@ -4,7 +4,7 @@ import "./App.css";
 import ChatPage from "./page/ChatPage"
 
 const App = () => (
-  <ChatPage/>
+  <ChatPage />
 )
 
 export default App;

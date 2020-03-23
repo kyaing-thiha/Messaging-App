@@ -4,19 +4,20 @@ import "./ChatPage.css";
 import ToolBar from "../components/ChatToolBar"
 import SideBar from "../components/ChatSideBar"
 import MessageScreen from "../components/MessageScreen"
-
-/**
-  Mock Data
-*/
-import {user1, user2} from "../mocks/mockUsers"
+import { fetchURL } from "../utils"
 
 class ChatPage extends Component {
   constructor(props){
     super(props);
     this.state = {
-      user: user1,
+      user: null,
       selectedReceiver: null,
     }
+  }
+
+  async componentDidMount(){
+    const user = await fetchURL("http://localhost:8080/getMockUser");
+    this.setState({user});
   }
 
   setSelectedReceiver = (receiver) => {
@@ -25,7 +26,7 @@ class ChatPage extends Component {
 
   render(){
     const { user } = this.state;
-    return (
+    return ( user &&
       <div className="chat-screen-container">
         <ToolBar profilePic={this.state.user.profilePic}/>
         <div className="chat-main-body-container">

@@ -38,6 +38,7 @@ const MessageScreen = (props) => {
                     <Message 
                         key={message._id} 
                         content={message.content}
+                        sentByUser={message.sender === user._id}
                     />
                 ))}
             </div>

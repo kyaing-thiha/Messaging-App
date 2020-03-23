@@ -1,6 +1,4 @@
 const express = require("express");
-const graphqlHTTP = require("express-graphql");
-const { buildSchema } = require("graphql");
 
 const app = express();
 const PORT = 8080;
@@ -12,8 +10,6 @@ app.use(attachCorsHeader);
 
 //Mock
 app.use("/mock", mockMiddleware);
-
-//GraphQL
 
 app.listen(PORT, ()=>{
     console.log(`server running on port ${PORT}`) 

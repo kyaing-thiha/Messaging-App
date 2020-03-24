@@ -2,33 +2,48 @@ const express = require("express");
 const multer = require("multer");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const Minion = require("../models/Minion");
 
 const router = express.Router();
 
-router.post("/createMinion", (req, res, next)=>{
-    const newMinion = new Minion({
-        _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        password: req.body.password,
-        profilePic: req.body.profilePic,
-    });
-    newMinion.save()
+router.post("/createMinion", (req, res, next) => {
+    function saveNewMinion (hashedPassword) {
+        const newMinion = new Minion({
+            _id: new mongoose.Types.ObjectId(),
+            name: req.body.name,
+            password: hashedPassword,
+            profilePic: req.body.profilePic,
+        });
+        newMinion.save()
             .then((minion) => {
                 res.json(minion)
             })
             .catch(
-                (err)=>console.log({Error: err})
-                );
-})
+                (err) => console.log({ Error: err })
+            );
+    }
+
+    bcrypt.hash(
+        req.body.password, 
+        bcrypt.genSaltSync(process.env.BCRYPT_SALT),
+        function(err, hash){
+            if (err) { res.json() }
+            if (hash) { saveNewMinion(hash) }
+        }
+    )
+}
+
+)
 
 router.post("/signIn", (req, res, next)=>{
     Minion.findOne({
         name: req.body.name
         })
         .then((minion)=>{
-                if (minion.password === req.body.password){
+                if (bcrypt.compareSync(req.body.password, minion.password)){
+                // if (minion.password === req.body.password){
                     const token = jwt.sign({
                         _id : minion._id, 
                         name: minion.name

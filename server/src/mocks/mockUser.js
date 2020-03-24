@@ -1,5 +1,6 @@
 var user2 = {
     _id: 2,
+    password: 2, 
     name: "minion2",
     profilePic: null,
     minionPals: [
@@ -9,6 +10,7 @@ var user2 = {
 
 var user3 = {
     _id: 3,
+    password: 3,
     name: "minion3",
     profilePic: null,
     minionPals: [
@@ -18,6 +20,7 @@ var user3 = {
 
 var user1 = {
     _id: 1,
+    password: 1,
     name: "minion1",
     profilePic: null,
     minionPals: [

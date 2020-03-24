@@ -19,6 +19,7 @@ app.post("/user/createUser", (req, res, next)=>{
     const newMinion = {
         _id: 7,
         name: req.body.name,
+        password: req.body.password,
         profilePic: req.body.profilePic,
         minionPals: [...mockUsers]
     }
@@ -27,12 +28,29 @@ app.post("/user/createUser", (req, res, next)=>{
     res.json(newMinion)
 })
 
+app.post("/user/signIn", (req, res, next)=>{
+    _id = req.body._id;
+    password = req.body.password;
+
+    //TODO: verify if the password is same as saved in database
+
+    res.json();
+})
+
 app.get("/mock/getMockUser", (req, res, next)=>{
     res.json(mockUsers[0]);
 });
 
-app.get("/mock/getMockMessages", (req, res, next)=>{
+app.get("/messages/retrieve", (req, res, next)=>{
+    
+    //TODO: to retrieve message from databse 
     res.json(mockMessages)
+})
+
+app.get("/messages/send", (req, res, next)=>{
+    //TODO: to create message
+    //TODO: to add message to database
+    res.json();
 })
 /** */
 

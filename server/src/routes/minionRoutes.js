@@ -1,6 +1,8 @@
 const express = require("express");
 const multer = require("multer");
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+
 const Minion = require("../models/Minion");
 
 const router = express.Router();
@@ -27,8 +29,16 @@ router.post("/signIn", (req, res, next)=>{
         })
         .then((minion)=>{
                 if (minion.password === req.body.password){
+                    const token = jwt.sign({
+                        name: req.body.name
+                    },
+                    process.env.JWT_KEY,
+                    {
+                        expiresIn: "1h"
+                    }
+                    );
                     res.json({
-                        token: null,
+                        token,
                         minion
                     })
                 }
@@ -38,13 +48,13 @@ router.post("/signIn", (req, res, next)=>{
 
 const upload = multer({
     storage: multer.diskStorage({
-        destination: function(req, file, cb) {
-          cb(null, 'profilePics/');
+        destination: function (req, file, cb) {
+            cb(null, 'profilePics/');
         },
-        filename: function(req, file, cb) {
-          cb(null, file.originalname);
+        filename: function (req, file, cb) {
+            cb(null, file.originalname);
         }
-      })
+    })
 })
 
 router.post("/uploadProfilePic", upload.single('profilePic'),(req, res, next)=>{

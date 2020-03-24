@@ -26,4 +26,4 @@ var user1 = {
     ]
 }
 
-module.exports = user1
+module.exports = [user1, user2, user3]

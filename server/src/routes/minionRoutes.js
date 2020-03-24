@@ -30,7 +30,8 @@ router.post("/signIn", (req, res, next)=>{
         .then((minion)=>{
                 if (minion.password === req.body.password){
                     const token = jwt.sign({
-                        name: req.body.name
+                        _id : minion._id, 
+                        name: minion.name
                     },
                     process.env.JWT_KEY,
                     {

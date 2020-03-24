@@ -2,8 +2,11 @@ const express = require("express");
 const bodyParser= require("body-parser");
 const mongoose = require("mongoose");
 require('dotenv').config();
+
 const attachCorsHeader = require("./src/middlewares/attachCorsHeader");
 const minionRoutes = require("./src/routes/minionRoutes");
+const messagesRoute = require("./src/routes/messagesRoute")
+const authenticate = require("./src/middlewares/authenticate")
 
 const app = express();
 const PORT = 8080;
@@ -25,19 +28,9 @@ app.use(attachCorsHeader);
 
 app.use(bodyParser.json());
 
+
 app.use("/minions", minionRoutes);
-
-app.get("/messages/retrieve", (req, res, next)=>{
-    
-    //TODO: to retrieve message from databse 
-    res.json(mockMessages)
-})
-
-app.get("/messages/send", (req, res, next)=>{
-    //TODO: to create message
-    //TODO: to add message to database
-    res.json();
-})
+app.use("/messages", authenticate,messagesRoute);
 
 /** Mock */
 const mockUsers = require("./src/mocks/mockUser")

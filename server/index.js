@@ -1,45 +1,31 @@
 const express = require("express");
 const bodyParser= require("body-parser");
+const mongoose = require("mongoose");
+const attachCorsHeader = require("./src/middlewares/attachCorsHeader");
+const minionRoutes = require("./src/routes/minionRoutes");
 
 const app = express();
 const PORT = 8080;
 
-const attachCorsHeader = require("./src/middlewares/attachCorsHeader");
+const password = "Minion";
+const mongoConnectionURL =  `mongodb+srv://Minion:${password}@cluster0-0avav.mongodb.net/test?retryWrites=true&w=majority`;
+const databaseName = "MinionAssociation"
+const options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    dbName: databaseName
+}
+
+mongoose.connect( mongoConnectionURL, options)
+    .then(()=>console.log("connected to database"))
+    .catch((error)=>console.log(`Error connecting to MongoDB ${error}`));
+
 
 app.use(attachCorsHeader);
 
 app.use(bodyParser.json());
 
-/** Mock */
-
-const mockUsers = require("./src/mocks/mockUser")
-const mockMessages = require("./src/mocks/mockMessages")
-
-app.post("/user/createUser", (req, res, next)=>{
-    const newMinion = {
-        _id: 7,
-        name: req.body.name,
-        password: req.body.password,
-        profilePic: req.body.profilePic,
-        minionPals: [...mockUsers]
-    }
-
-    mockUsers.push(newMinion)
-    res.json(newMinion)
-})
-
-app.post("/user/signIn", (req, res, next)=>{
-    _id = req.body._id;
-    password = req.body.password;
-
-    //TODO: verify if the password is same as saved in database
-
-    res.json();
-})
-
-app.get("/mock/getMockUser", (req, res, next)=>{
-    res.json(mockUsers[0]);
-});
+app.use("/minions", minionRoutes);
 
 app.get("/messages/retrieve", (req, res, next)=>{
     
@@ -52,6 +38,19 @@ app.get("/messages/send", (req, res, next)=>{
     //TODO: to add message to database
     res.json();
 })
+
+/** Mock */
+const mockUsers = require("./src/mocks/mockUser")
+const mockMessages = require("./src/mocks/mockMessages")
+
+app.get("/mock/getMockUser", (req, res, next)=>{
+    res.json(mockUsers[0]);
+});
+
+app.get("/mock/getMockMessages", (req, res, next)=>{
+    res.json(mockMessages);
+});
+
 /** */
 
 app.listen(PORT, ()=>{

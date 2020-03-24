@@ -1,14 +1,14 @@
 const express = require("express");
 const bodyParser= require("body-parser");
 const mongoose = require("mongoose");
+require('dotenv').config();
 const attachCorsHeader = require("./src/middlewares/attachCorsHeader");
 const minionRoutes = require("./src/routes/minionRoutes");
 
 const app = express();
 const PORT = 8080;
 
-const password = "Minion";
-const mongoConnectionURL =  `mongodb+srv://Minion:${password}@cluster0-0avav.mongodb.net/test?retryWrites=true&w=majority`;
+const mongoConnectionURL =  process.env.DB_CONNECTION;
 const databaseName = "MinionAssociation"
 const options = {
     useNewUrlParser: true,

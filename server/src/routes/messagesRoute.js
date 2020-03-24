@@ -4,11 +4,11 @@ const Message = require("../models/Message")
 
 const router = express.Router();
 
-router.post("/retrieve", (req, res, next)=>{
+router.post("/conversation/:with", (req, res, next)=>{
     const query = {
         $or: [
-            {$and: [{sender: req.senderId}, {receiver: req.body.with}]},
-            {$and: [{receiver: req.senderId}, {sender: req.body.with}]}
+            {$and: [{sender: req.senderId}, {receiver: req.params.with}]},
+            {$and: [{sender: req.params.with}, {receiver: req.senderId}]}
         ]
     }
     Message.find(query)

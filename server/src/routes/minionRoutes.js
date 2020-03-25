@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const multer = require("multer");
 const mongoose = require("mongoose");
@@ -14,7 +15,7 @@ router.post("/createMinion", (req, res, next) => {
             _id: new mongoose.Types.ObjectId(),
             name: req.body.name,
             password: hashedPassword,
-            profilePic: req.body.profilePic,
+            profilePic: req.body.profilePic || null,
         });
         newMinion.save()
             .then((minion) => {
@@ -24,11 +25,10 @@ router.post("/createMinion", (req, res, next) => {
                 (error) => next(error)
             );
     }
-
     bcrypt.hash(
         req.body.password,
-        bcrypt.genSaltSync(process.env.BCRYPT_SALT),
-        function (err, hash) {
+        bcrypt.genSaltSync(parseInt(process.env.BCRYPT_SALT)),
+        function (error, hash) {
             if (error) { next(error) }
             if (hash) { saveNewMinion(hash) }
         }
@@ -64,6 +64,18 @@ router.post("/signIn", (req, res, next) => {
         })
         .catch((error) => next(error))
 });
+
+router.get("/getAllMinions", (req, res, next) => {
+    Minion.find()
+            .then(minions => {
+                return minions.map(minion => ({
+                        _id: minion._id,
+                        name: minion.name
+                    })
+                )})
+            .then(minionList => res.status(200).json(minionList))
+            .catch(error => next(error))
+})
 
 const upload = multer({
     storage: multer.diskStorage({

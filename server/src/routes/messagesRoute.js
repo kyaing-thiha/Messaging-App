@@ -4,11 +4,11 @@ const Message = require("../models/Message")
 
 const router = express.Router();
 
-router.post("/conversation/:with", (req, res, next)=>{
+router.post("/conversation", (req, res, next)=>{
     const query = {
         $or: [
-            {$and: [{sender: req.senderId}, {receiver: req.params.with}]},
-            {$and: [{sender: req.params.with}, {receiver: req.senderId}]}
+            {$and: [{sender: req.senderId}, {receiver: req.body.with}]},
+            {$and: [{sender: req.body.with}, {receiver: req.senderId}]}
         ]
     }
     Message.find(query)
@@ -17,7 +17,6 @@ router.post("/conversation/:with", (req, res, next)=>{
 })
 
 router.post("/send", (req, res, next)=>{
-    console.log("running")
     const newMessage = new Message({
         _id: new mongoose.Types.ObjectId(),
         sender: req.senderId,

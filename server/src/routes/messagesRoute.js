@@ -12,11 +12,12 @@ router.post("/conversation/:with", (req, res, next)=>{
         ]
     }
     Message.find(query)
-        .then(messages=>res.json(messages))
-        .catch(error => console.log(error))
+        .then(messages=>res.status(200).json(messages))
+        .catch(error => next(error))
 })
 
 router.post("/send", (req, res, next)=>{
+    console.log("running")
     const newMessage = new Message({
         _id: new mongoose.Types.ObjectId(),
         sender: req.senderId,
@@ -27,7 +28,7 @@ router.post("/send", (req, res, next)=>{
 
     newMessage.save()
     .then(message => res.json(message))
-    .catch(err=>console.log(err))
+    .catch(error=>next(error))
 });
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Minion = require("../models/Minion");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 function hashPassword(itemToHash, callback){
     bcrypt.hash(
@@ -44,10 +45,7 @@ exports.signIn = (req, res, next) => {
                     process.env.JWT_KEY,
                     { expiresIn: "1h" }
                 );
-                res.status(200).json({
-                    token,
-                    minion
-                })
+                res.status(200).json({ token })
             } else{
                 const error = new Error("Authentication Failed");
                 error.status = 404;
@@ -57,14 +55,23 @@ exports.signIn = (req, res, next) => {
         .catch((error) => next(error))
 }
 
-exports.getAllMinions = (req, res, next) => {
-    Minion.find()
-            .then(minions => {
-                return minions.map(minion => ({
-                        _id: minion._id,
-                        name: minion.name
-                    })
-                )})
-            .then(minionList => res.status(200).json(minionList))
-            .catch(error => next(error))
+exports.getMinionData = async (req, res, next) => {
+    try{
+        const filterFields = {_id: 1, name: 1};
+        const minionData =  await Minion.findOne(
+                                    { _id: req.senderId },
+                                    filterFields);
+
+        const minionPals = await Minion.find(
+                                        {_id: {$ne: req.senderId}}, 
+                                        filterFields)
+        res.status(200).json({
+            _id: minionData._id,
+            name: minionData.name,
+            minionPals: minionPals
+        });
+    } 
+    catch(error){
+        next(error)
+    }
 }

@@ -1,3 +1,5 @@
+const axios = require("axios");
+
 export const filterArrayBasedOnInputString = (array, input, key) => {
     return array.filter((item) => {
         const inputUpperCase = input.toUpperCase();
@@ -11,6 +13,16 @@ export const fetchURL = async(url) => {
         const fetchResponse = await fetch(url);
         const responseJSON = await fetchResponse.json();
         return responseJSON;
+    }
+    catch(error){
+        throw error;
+    }
+}
+
+export const postURL = async(url, options) => {
+    try{
+        const returnJSON = axios.post(url, options);
+        return returnJSON;
     }
     catch(error){
         throw error;

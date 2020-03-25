@@ -1,18 +1,14 @@
 require('dotenv').config();
 const express = require("express");
 const multer = require("multer");
-const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-
-const Minion = require("../models/Minion");
 
 const router = express.Router();
+const authenticate = require("../middlewares/authenticate");
 const minionController = require("../controllers/minionController")
 
 router.post("/createMinion", minionController.createMinion)
 router.post("/signIn", minionController.signIn);
-router.get("/getAllMinions", minionController.getAllMinions)
+router.post("/getMinionData", authenticate, minionController.getMinionData)
 
 const upload = multer({
     storage: multer.diskStorage({

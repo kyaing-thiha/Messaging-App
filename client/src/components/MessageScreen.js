@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Message from "./Message";
 import "./MessageScreen.css";
-import { fetchURL } from "../utils"
+import { postURL } from "../utils"
 
 const Title = ({ name }) => (
     <div className="message-screen-title">
@@ -19,8 +19,11 @@ class MessageScreen extends Component {
 
     fetchMessages = async () => {
         try{
-            const { user, selectedReceiver } = this.props;
-            const messages = await fetchURL(`http://localhost:8080/messages/conversation`);
+            const options = {
+                token: this.props.token,
+                with: this.props.selectedReceiver._id
+            }
+            const messages = await postURL("http://localhost:8080/messages/conversation", options);
             this.setState({
                 messages
             })

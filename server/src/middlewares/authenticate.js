@@ -9,7 +9,7 @@ router.use((req, res, next)=>{
         next();
     }
     catch(error){
-        //Error
+        res.json({error})
     }
 })
 

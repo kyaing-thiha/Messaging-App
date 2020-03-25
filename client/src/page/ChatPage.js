@@ -4,7 +4,7 @@ import "./ChatPage.css";
 import ToolBar from "../components/ChatToolBar"
 import SideBar from "../components/ChatSideBar"
 import MessageScreen from "../components/MessageScreen"
-import { fetchURL } from "../utils"
+import { postURL } from "../utils"
 
 class ChatPage extends Component {
   constructor(props){
@@ -17,7 +17,8 @@ class ChatPage extends Component {
   
   async componentDidMount(){
     try {
-      const user = null;
+      const user = await postURL("http://localhost:8080/minions/getMinionData",
+                            {token: this.props.token});
       this.setState({user});
     }
     catch(error){

@@ -20,7 +20,7 @@ class MessageScreen extends Component {
     fetchMessages = async () => {
         try{
             const { user, selectedReceiver } = this.props;
-            const messages = await fetchURL(`http://localhost:8080/messages/retrieve`);
+            const messages = await fetchURL(`http://localhost:8080/messages/conversation`);
             this.setState({
                 messages
             })

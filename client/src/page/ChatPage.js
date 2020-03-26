@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import "./ChatPage.css";
+import PropTypes from "prop-types"
 
 import ToolBar from "../components/ChatToolBar"
 import SideBar from "../components/ChatSideBar"
 import MessageScreen from "../components/MessageScreen"
 import { postURL } from "../utils"
+
+/**
+ * ChatPage is a component for rendering ChatPage
+ * 
+ * PropTypes
+ * @param {String} token verified token to request user data from server
+ */
 
 class ChatPage extends Component {
   constructor(props){
@@ -22,7 +30,8 @@ class ChatPage extends Component {
       this.setState({user});
     }
     catch(error){
-      /* LOGIC to handle if fetching user failed*/
+      //TODO: redirect the user to log back in
+      throw new Error("Failed to get MinionData")
     }
   }
 
@@ -37,10 +46,11 @@ class ChatPage extends Component {
         <ToolBar profilePic={this.state.user.profilePic}/>
         <div className="chat-main-body-container">
           <SideBar 
-            allReceivers = {user.minionPals} 
+            allReceivers = {user && user.minionPals} 
             onSelectReceiver = {this.setSelectedReceiver}
             selectedReceiver= {this.state.selectedReceiver}
           />
+          {/* TODO: only pass the required props */}
           <MessageScreen 
             {...this.state} 
             token={this.props.token}
@@ -49,6 +59,10 @@ class ChatPage extends Component {
       </div>
     );
   }
+}
+
+ChatPage.propType = {
+  token: PropTypes.String
 }
 
 export default ChatPage;

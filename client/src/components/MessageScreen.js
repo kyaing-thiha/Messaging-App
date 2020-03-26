@@ -3,6 +3,13 @@ import Message from "./Message";
 import "./MessageScreen.css";
 import { postURL } from "../utils"
 
+/**
+ * propTypes
+ * @param {String} token value of the verified token 
+ * @param {String} userId of the loggedin user 
+ * @param {String} selectedUserId of the selectedReceiver
+ */
+
 const Title = ({ name }) => (
     <div className="message-screen-title">
         {name}
@@ -28,7 +35,10 @@ class MessageScreen extends Component {
                 messages
             })
         }
-        catch{/* To handle fetching messages failed */}
+        catch{
+            /** TODO: to display error message failing to retrieve messages */
+            throw new Error("Failed to retrieve messages")
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -44,8 +54,13 @@ class MessageScreen extends Component {
             receiver: receiverId,
             content
         }
-        const messageSent = await postURL(sendURL, options)
-        console.log(messageSent);
+        try{
+            const messageSent = await postURL(sendURL, options)
+        }
+        catch(error){
+            throw new Error("message failed to send");
+        }
+        
     }
 
     render() {

@@ -19,8 +19,6 @@ export const fetchURL = async(url) => {
     }
 }
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc5ZDk5NzExODc3YWY1MWUxZTNlMjciLCJuYW1lIjoibWluaW9uMyIsImlhdCI6MTU4NTEyMjY3MywiZXhwIjoxNTg1MTI2MjczfQ.vrJ13MVmJdePgrxHjikCQ555X8yX3BXw5XbZqpiqGvg"
-
 export const postURL = async (url, options) => {
     try{
         const response = await axios.post(url, options);

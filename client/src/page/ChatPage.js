@@ -50,9 +50,8 @@ class ChatPage extends Component {
             onSelectReceiver = {this.setSelectedReceiver}
             selectedReceiver= {this.state.selectedReceiver}
           />
-          {/* TODO: only pass the required props */}
           <MessageScreen 
-            {...this.state} 
+            {...this.state}
             token={this.props.token}
           />
         </div>

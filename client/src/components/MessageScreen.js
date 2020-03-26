@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import Message from "./Message";
 import "./MessageScreen.css";
 import { postURL } from "../utils"
+import TextArea from "./TextArea"
 
 /**
  * propTypes
  * @param {String} token value of the verified token 
- * @param {String} userId of the loggedin user 
- * @param {String} selectedUserId of the selectedReceiver
+ * @param {Object} user  that signed in
+ * @param {Object} selectedReceiver to make a coversation with
  */
 
 const Title = ({ name }) => (
@@ -47,20 +48,22 @@ class MessageScreen extends Component {
         }
     }
 
-    async handleSendMessage(receiverId, content){
+    handleSendMessage = async (content)=>{
         const sendURL = "http://localhost:8080/messages/send"
         const options = {
             token: this.props.token,
-            receiver: receiverId,
+            receiver: this.props.selectedReceiver._id,
             content
         }
         try{
             const messageSent = await postURL(sendURL, options)
+            this.setState({
+                messages: [...this.state.messages, messageSent]
+            })
         }
         catch(error){
             throw new Error("message failed to send");
         }
-        
     }
 
     render() {
@@ -95,20 +98,12 @@ class MessageScreen extends Component {
                         />
                     ))}
                 </div>
-
-                <div className="text-area-container">
-                    <input 
-                        type="text" 
-                        className="text-area"
-                        onKeyUp = {(e)=>{
-                            if (e.key==="Enter"){
-                                const receiverId = this.props.selectedReceiver._id;
-                                const content = e.target.value;
-                                this.handleSendMessage(receiverId, content)
-                            }
-                        }}
-                    />
-                </div>
+                
+                {selectedReceiver &&
+                    (<TextArea 
+                    onClickEnter = {this.handleSendMessage}
+                    />)
+                }
             </div>
         )
     }

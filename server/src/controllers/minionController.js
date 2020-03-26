@@ -3,13 +3,13 @@ const Minion = require("../models/Minion");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-function hashPassword(itemToHash, callback){
+function hashPassword(itemToHash, success, failure){
     bcrypt.hash(
         itemToHash,
         bcrypt.genSaltSync(parseInt(process.env.BCRYPT_SALT)),
         function (error, hash) {
-            if (error) { next(error) }
-            if (hash) { callback(hash) }
+            if (error) { failure(error) }
+            if (hash) { success(hash) }
         }
     )
 }
@@ -31,7 +31,7 @@ exports.createMinion = (req, res, next) => {
             );
     }
 
-    hashPassword(req.body.password, saveNewMinion);
+    hashPassword(req.body.password, saveNewMinion, next);
 }
 
 exports.signIn = (req, res, next) => {

@@ -37,6 +37,17 @@ class MessageScreen extends Component {
         }
     }
 
+    async handleSendMessage(receiverId, content){
+        const sendURL = "http://localhost:8080/messages/send"
+        const options = {
+            token: this.props.token,
+            receiver: receiverId,
+            content
+        }
+        const messageSent = await postURL(sendURL, options)
+        console.log(messageSent);
+    }
+
     render() {
         const { user, selectedReceiver } = this.props;
         const { messages } = this.state;
@@ -71,8 +82,17 @@ class MessageScreen extends Component {
                 </div>
 
                 <div className="text-area-container">
-                    <input type="text" className="text-area">
-                    </input>
+                    <input 
+                        type="text" 
+                        className="text-area"
+                        onKeyUp = {(e)=>{
+                            if (e.key==="Enter"){
+                                const receiverId = this.props.selectedReceiver._id;
+                                const content = e.target.value;
+                                this.handleSendMessage(receiverId, content)
+                            }
+                        }}
+                    />
                 </div>
             </div>
         )

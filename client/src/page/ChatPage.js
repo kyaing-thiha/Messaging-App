@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "./ChatPage.css";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 
 import ToolBar from "../components/ChatToolBar"
 import SideBar from "../components/ChatSideBar"
@@ -30,8 +31,7 @@ class ChatPage extends Component {
       this.setState({user});
     }
     catch(error){
-      //TODO: redirect the user to log back in
-      throw new Error("Failed to get MinionData")
+      this.setState({user: null})
     }
   }
 
@@ -41,8 +41,9 @@ class ChatPage extends Component {
 
   render(){
     const { user } = this.state;
-    return ( user &&
-      <div className="chat-screen-container">
+    
+    return ( user? 
+      (<div className="chat-screen-container">
         <ToolBar profilePic={this.state.user.profilePic}/>
         <div className="chat-main-body-container">
           <SideBar 
@@ -55,7 +56,7 @@ class ChatPage extends Component {
             token={this.props.token}
           />
         </div>
-      </div>
+      </div>):(<Redirect to="/Login"/>)
     );
   }
 }

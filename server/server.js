@@ -2,9 +2,12 @@ const http = require("http");
 const app = require("./app");
 const mongoose = require("mongoose");
 require('dotenv').config();
+const serverSocket = require("./server-socket");
 
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
+
+serverSocket.init(server);
 
 const mongoConnectionURL =  process.env.DB_CONNECTION;
 const databaseName = "MinionAssociation"
@@ -21,3 +24,5 @@ mongoose.connect( mongoConnectionURL, options)
 server.listen(port, ()=>{
     console.log(`server running on port ${port}`) 
 })
+
+module.exports = server;

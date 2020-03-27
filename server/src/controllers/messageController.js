@@ -1,5 +1,6 @@
 const Message = require("../models/Message");
 const mongoose = require("mongoose");
+const serverSocket = require("../../server-socket");
 
 exports.retrieveConversations = (req, res, next)=>{
     const query = {
@@ -23,6 +24,9 @@ exports.sendMessages = (req, res, next)=>{
     });
 
     newMessage.save()
-    .then(message => res.json(message))
+    .then(message => {
+        serverSocket.sendMessage(req.senderId,message);
+        res.json(message)
+    })
     .catch(error=>next(error))
 }

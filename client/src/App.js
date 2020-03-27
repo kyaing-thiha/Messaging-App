@@ -7,7 +7,7 @@ import ChatPage from "./page/ChatPage"
 //TODO: retrieve token from server
 const App = () => (
   <ChatPage 
-    token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc5ZDk5NzExODc3YWY1MWUxZTNlMjciLCJuYW1lIjoibWluaW9uMyIsImlhdCI6MTU4NTE5NjM0MywiZXhwIjoxNTg1MTk5OTQzfQ.7G3h6PhRmKUcVULOoq-LM0FKWtKMTkcsSumQuIU4u-w"
+    token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTdhZjJjMmNjOTVkNTAyNTdlZmRjOWMiLCJuYW1lIjoibWluaW9uMSIsImlhdCI6MTU4NTI3MzY4OSwiZXhwIjoxNTg1Mjc3Mjg5fQ.e23KZy_tKNjP97yyB9Ig5_uyrdo-1Cmlp--Ev8GDHFw"
   />
 )
 

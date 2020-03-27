@@ -2,9 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Server Code for messaging application",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kyaing Thiha",
@@ -17,7 +17,8 @@
     "graphql": "^14.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.6",
-    "multer": "^1.4.2"
+    "multer": "^1.4.2",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"

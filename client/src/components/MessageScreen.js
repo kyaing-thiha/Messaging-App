@@ -3,6 +3,7 @@ import Message from "./Message";
 import "./MessageScreen.css";
 import { postURL } from "../utils"
 import TextArea from "./TextArea"
+import io from "socket.io-client"
 
 /**
  * propTypes
@@ -23,6 +24,19 @@ class MessageScreen extends Component {
         this.state = {
             messages: []
         }
+    }
+
+    componentDidMount(){
+        const socketOptions = {
+            query: `token=${this.props.token}`
+        };
+        const clientSocket = io("http://localhost:8080", socketOptions);
+        clientSocket.on("connect", ()=>{
+            console.log("sockets connected");
+        });
+        clientSocket.on("newMessage", (message)=>{
+            console.log(message);
+        })
     }
 
     fetchMessages = async () => {

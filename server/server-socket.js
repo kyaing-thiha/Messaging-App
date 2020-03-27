@@ -15,9 +15,9 @@ module.exports = {
         })
     },
 
-    sendMessage: (userId, message) => {
-        sockets[userId] ? 
-            socket[userId].emit("newMessage", message) : 
-            null;
+    sendMessage: (receiverId, message) => {
+        sockets[receiverId] ? 
+            sockets[receiverId].emit("newMessage", message):
+            null
     }
 }

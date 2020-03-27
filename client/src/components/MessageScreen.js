@@ -34,8 +34,10 @@ class MessageScreen extends Component {
         clientSocket.on("connect", ()=>{
             console.log("sockets connected");
         });
-        clientSocket.on("newMessage", (message)=>{
-            console.log(message);
+        clientSocket.on("newMessage", (newMessage)=>{
+            this.setState({
+                messages: [...this.state.messages, newMessage]
+            })
         })
     }
 

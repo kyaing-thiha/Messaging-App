@@ -25,7 +25,7 @@ exports.sendMessages = (req, res, next)=>{
 
     newMessage.save()
     .then(message => {
-        serverSocket.sendMessage(req.senderId,message);
+        serverSocket.sendMessage(req.body.receiver, message)
         res.json(message)
     })
     .catch(error=>next(error))

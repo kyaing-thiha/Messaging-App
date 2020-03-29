@@ -6,10 +6,6 @@ const router = express.Router();
 const authenticate = require("../middlewares/authenticate");
 const minionController = require("../controllers/minionController")
 
-router.post("/createMinion", minionController.createMinion)
-router.post("/signIn", minionController.signIn);
-router.post("/getMinionData", authenticate, minionController.getMinionData)
-
 const upload = multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {
@@ -21,8 +17,9 @@ const upload = multer({
     })
 })
 
-router.post("/uploadProfilePic", upload.single('profilePic'), (req, res, next) => {
-    res.json({});
-})
+router.post("/createMinion", minionController.createMinion)
+router.post("/signIn", minionController.signIn);
+router.post("/getMinionData", authenticate, minionController.getMinionData);
+router.post("/uploadProfilePic", upload.single('profilePic'), minionController.uploadMinionPhoto);
 
 module.exports = router;

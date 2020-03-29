@@ -7,9 +7,13 @@ const messagesRoute = require("./src/routes/messagesRoute")
 const authenticate = require("./src/middlewares/authenticate")
 
 const app = express();
+let path = require("path");
 
 app.use(attachCorsHeader);
 app.use(bodyParser.json());
+
+let profilePicsPath = path.join(__dirname, 'ProfilePics');
+app.use("/profilePics", express.static(profilePicsPath));
 
 app.use("/minions", minionRoutes);
 app.use("/messages", authenticate,messagesRoute);

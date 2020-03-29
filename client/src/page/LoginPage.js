@@ -8,12 +8,12 @@ const Login = (props) => {
     
     const handleLogin = async () =>{
         try{
-            const url = "http://localhost:8080/minions/signIn";
+            const endpoint = "minions/signIn";
             const options = {
                 name: userName,
                 password
             }
-            const token = await postURL(url, options);
+            const token = await postURL(endpoint, options);
             props.setToken(token)
         }
         catch(error){

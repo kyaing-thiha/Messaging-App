@@ -25,7 +25,7 @@ class ChatPage extends Component {
   
   async componentDidMount(){
     try {
-      const user = await postURL("http://localhost:8080/minions/getMinionData",
+      const user = await postURL("minions/getMinionData",
                             {token: this.props.token});
       this.setState({user});
     }

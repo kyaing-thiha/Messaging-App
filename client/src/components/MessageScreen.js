@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Message from "./Message";
 import "./MessageScreen.css";
-import { postURL } from "../utils"
+import { postURL, serverUrl } from "../utils"
 import TextArea from "./TextArea"
 import io from "socket.io-client"
 
@@ -30,7 +30,7 @@ class MessageScreen extends Component {
         const socketOptions = {
             query: `token=${this.props.token}`
         };
-        const clientSocket = io("http://localhost:8080", socketOptions);
+        const clientSocket = io(serverUrl, socketOptions);
         clientSocket.on("connect", ()=>{
             console.log("sockets connected");
         });
@@ -47,7 +47,7 @@ class MessageScreen extends Component {
                 token: this.props.token,
                 with: this.props.selectedReceiver._id
             }
-            const messages = await postURL("http://localhost:8080/messages/conversation", options);
+            const messages = await postURL("messages/conversation", options);
             this.setState({
                 messages
             })
@@ -65,7 +65,7 @@ class MessageScreen extends Component {
     }
 
     handleSendMessage = async (content)=>{
-        const sendURL = "http://localhost:8080/messages/send"
+        const sendURL = "messages/send"
         const options = {
             token: this.props.token,
             receiver: this.props.selectedReceiver._id,

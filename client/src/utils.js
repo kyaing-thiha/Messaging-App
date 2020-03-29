@@ -1,5 +1,8 @@
 const axios = require('axios')
 
+const serverPort = process.env.REACT_APP_SERVER_PORT;
+export const serverUrl = "http://"+window.location.hostname+":"+serverPort;
+
 export const filterArrayBasedOnInputString = (array, input, key) => {
     return array.filter((item) => {
         const inputUpperCase = input.toUpperCase();
@@ -19,8 +22,9 @@ export const fetchURL = async(url) => {
     }
 }
 
-export const postURL = async (url, options) => {
+export const postURL = async (endPoint, options) => {
     try{
+        const url = serverUrl+"/"+endPoint;
         const response = await axios.post(url, options);
         return response.data;
     }

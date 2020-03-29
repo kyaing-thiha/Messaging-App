@@ -7,10 +7,12 @@ import "./ChatToolBar.css"
  */
 
 const ChatToolBar = ({profilePic}) => {
+    
     return (
     <div className="toolbar" >
         <span className="application-name">Kyaing's Minions</span>
         <span className="profile-pic">
+            {console.log(profilePic)}
             <img 
                 src={profilePic} 
                 alt="minion"

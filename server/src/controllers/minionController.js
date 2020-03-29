@@ -81,17 +81,17 @@ let path = require("path");
 
 exports.uploadMinionPhoto =  (req, res, next) => {
     const host = req.protocol + '://' + req.get('host');
-    const imagePath = path.join(host, 'profilePics', req.file.filename)
+    const imagePath = host + '/profilePics/' + req.file.filename;
     Minion.updateOne(
         { name: req.body.name },
         {
             $set: {
-            profilePic: imagePath
+                profilePic: imagePath
             }
         }
     ).then(minon => 
         res.status(200).json({
-            imagePath: imagePath
+            imagePath
         })
     )
 }

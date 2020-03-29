@@ -18,7 +18,7 @@ const SideBarItem = ({name, onSelect, profilePic, isSelected}) => (
     >
         <div className="profile-picture">
             <img 
-                src={"http://localhost:8080/"+profilePic} 
+                src={profilePic} 
                 alt="minion"
             />
         </div>

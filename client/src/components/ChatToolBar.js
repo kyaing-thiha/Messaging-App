@@ -12,7 +12,7 @@ const ChatToolBar = ({profilePic}) => {
         <span className="application-name">Kyaing's Minions</span>
         <span className="profile-pic">
             <img 
-                src={"http://localhost:8080/"+profilePic} 
+                src={profilePic} 
                 alt="minion"
             />
         </span>

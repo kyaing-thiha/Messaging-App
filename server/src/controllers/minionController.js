@@ -78,7 +78,7 @@ exports.getMinionData = async (req, res, next) => {
 }
 
 exports.uploadMinionPhoto =  (req, res, next) => {
-    const imagePath = "profilePics/" + req.file.filename;
+    const imagePath = "http://localhost:8080/profilePics/" + req.file.filename;
     Minion.updateOne(
         { name: req.body.name },
         {

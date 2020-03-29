@@ -6,11 +6,17 @@ import "./ChatToolBar.css"
  * @param {profilePic} url to retrive the profile picture for the user 
  */
 
-const ChatToolBar = ({profilePic}) => (
+const ChatToolBar = ({profilePic}) => {
+    return (
     <div className="toolbar" >
         <span className="application-name">Kyaing's Minions</span>
-        <span className="profile-pic"></span>
+        <span className="profile-pic">
+            <img 
+                src={"http://localhost:8080/"+profilePic} 
+                alt="minion"
+            />
+        </span>
     </div>
-)
+)}
 
 export default ChatToolBar;

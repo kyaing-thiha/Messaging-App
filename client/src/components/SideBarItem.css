@@ -21,6 +21,10 @@
     border-radius: 40px;
     background-color: #FFFFFF;
     align-self: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .user-name{
@@ -29,3 +33,7 @@
     padding: 10px;
 }
 
+img{
+    max-width: 50px;
+    max-height: 50px;
+}

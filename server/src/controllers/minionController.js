@@ -57,7 +57,7 @@ exports.signIn = (req, res, next) => {
 
 exports.getMinionData = async (req, res, next) => {
     try{
-        const filterFields = {_id: 1, name: 1};
+        const filterFields = {_id: 1, name: 1, profilePic: 1};
         const minionData =  await Minion.findOne(
                                     { _id: req.senderId },
                                     filterFields);
@@ -68,6 +68,7 @@ exports.getMinionData = async (req, res, next) => {
         res.status(200).json({
             _id: minionData._id,
             name: minionData.name,
+            profilePic: minionData.profilePic,
             minionPals: minionPals
         });
     } 

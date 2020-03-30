@@ -19,5 +19,9 @@ module.exports = {
         sockets[receiverId] ? 
             sockets[receiverId].emit("newMessage", message):
             null
+    },
+
+    signOut: (userId) => {
+        delete sockets[userId];
     }
 }

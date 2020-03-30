@@ -19,6 +19,7 @@ const upload = multer({
 
 router.post("/createMinion", minionController.createMinion)
 router.post("/signIn", minionController.signIn);
+router.post("/signOut", minionController.signOut);
 router.post("/getMinionData", authenticate, minionController.getMinionData);
 router.post("/uploadProfilePic", upload.single('profilePic'), minionController.uploadMinionPhoto);
 

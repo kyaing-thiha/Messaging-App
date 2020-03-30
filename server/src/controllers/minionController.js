@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Minion = require("../models/Minion");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const serverSocket = require("../../server-socket");
 
 function hashPassword(itemToHash, success, failure){
     bcrypt.hash(
@@ -32,6 +33,13 @@ exports.createMinion = (req, res, next) => {
     }
 
     hashPassword(req.body.password, saveNewMinion, next);
+}
+
+exports.signOut = (req, res, next) => {
+    serverSocket.signOut(req.senderId);
+    res.status(200).json({
+        message: "signout successful"
+    })
 }
 
 exports.signIn = (req, res, next) => {

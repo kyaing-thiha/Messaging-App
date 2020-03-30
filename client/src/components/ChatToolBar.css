@@ -8,6 +8,10 @@
     justify-content: space-between;
 }
 
+.minion-name{
+    color: #FFFFFF;
+}
+
 .application-name{
     color: #FFFFFF;
     font-size: 30px;
@@ -28,4 +32,12 @@
 img{
     max-width: 50px;
     max-height: 50px;
+}
+
+.logout-button{
+    color: #FFFFFF;
+}
+
+.logout-button:hover{
+    text-decoration: underline;
 }

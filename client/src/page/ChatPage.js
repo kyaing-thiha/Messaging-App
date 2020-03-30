@@ -38,12 +38,29 @@ class ChatPage extends Component {
     this.setState({selectedReceiver: receiver})
   }
 
+  handleLogout = () =>{
+    let options = {
+      token: this.props.token
+    }
+    postURL("minions/signIn", options)
+      .then(success=>{
+        this.props.resetToken();
+      })
+      .catch(failure=>{
+        console.log("failed to logout")
+      })
+  }
+
   render(){
     const { user } = this.state;
     
     return ( user ? 
       (<div className="chat-screen-container">
-        <ToolBar profilePic={this.state.user.profilePic}/>
+        <ToolBar 
+          profilePic={this.state.user.profilePic}
+          name={this.state.user.name}
+          handleLogout = {this.handleLogout}
+        />
         <div className="chat-main-body-container">
           <SideBar 
             allReceivers = {user && user.minionPals} 

@@ -6,10 +6,8 @@ The client side was boostraped with [Create React App](https://github.com/facebo
 Use the package manager `npm install`.
 
 ## Usuage
-    *To start the server: \
-    `npm run server`
-    *To start the client: \
-    `npm run client`
+To start server: `npm run server`\
+To start client: `npm run client`
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

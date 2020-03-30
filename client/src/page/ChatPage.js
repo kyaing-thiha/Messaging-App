@@ -42,7 +42,7 @@ class ChatPage extends Component {
     let options = {
       token: this.props.token
     }
-    postURL("minions/signIn", options)
+    postURL("minions/signOut", options)
       .then(success=>{
         this.props.resetToken();
       })

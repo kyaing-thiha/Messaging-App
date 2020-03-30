@@ -1,5 +1,5 @@
 # Messaging-App
-Superhero-chat is the prototype of messaging app written in MERN stack.\
+It is the prototype of messaging app written in MERN stack.\
 The client side was boostraped with [Create React App](https://github.com/facebook/create-react-app)
 
 ## Installation
